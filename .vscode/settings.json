@@ -1,0 +1,13 @@
+{
+          "editor.formatOnSaveMode": "modifications",
+          "editor.formatOnSave": true,
+          "editor.formatOnPaste": true,
+          "editor.wordWrap": "on",
+          "editor.wrappingIndent": "indent",
+          "editor.tabCompletion": "on",
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "[blade]": {
+                    "editor.defaultFormatter": "amirmarmul.laravel-blade-vscode"
+          },
+          "editor.formatOnType": true
+}
