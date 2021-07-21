@@ -16,7 +16,8 @@ use \App\Models\gajiberkala;
 use App\Models\pangkatberkala;
 use \App\models\KADIS;
 use PDF;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use DataTables;
 
 class BerkalaController extends Controller
@@ -42,12 +43,12 @@ class BerkalaController extends Controller
         $data = DB::table('tbl_gaji_berkala')
             ->join('pegawai', 'tbl_gaji_berkala.pegawai_id', '=', 'pegawai.NIP')
             ->select('pegawai.NIP', 'pegawai.Nama', 'pegawai.masa_kerja_t', 'pegawai.masa_kerja_b', 'tbl_gaji_berkala.tgl_berlaku_S', 'tbl_gaji_berkala.pegawai_id')
-            ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun);
+            ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun)->get();
 
-        $recordsFiltered = $data->get()->count();
+        $recordsFiltered = $data->count();
 
         if ($request->input('length') != -1) $data = $data->skip($request->input('start'))->take($request->input('length'));
-        $data = $data->orderBy($orderBy, $request->input('order.0.dir'))->get();
+        $data = $data->sortByDesc($orderBy);
         $recordsTotal = $data->count();
 
         return response()->json([
