@@ -39,7 +39,7 @@
           <th>Nama</th>
           <th>Masa Kerja Sebelumya</th>
           <th>Tanggal Harus Berkala</th>
-          <th style="width: 20px; text-align:center">Aksi</th>
+          <!-- <th style="width: 20px; text-align:center">Aksi</th> -->
         </tr>
       </thead>
       <tbody>
@@ -94,6 +94,42 @@
       url: "{{url('')}}/tampilberkala",
       type: "POST",
     },
+    columnDefs: [{
+        "targets": 0,
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta) {
+          return row.NIP;
+        }
+      },
+      {
+        "targets": 1,
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta) {
+          return row.Nama;
+        }
+      },
+      {
+        "targets": 2,
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta) {
+          return row.masa_kerja_t;
+        }
+      },
+      {
+        "targets": 3,
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta) {
+          return row.masa_kerja_b;
+        }
+      },
+      {
+        "targets": 4,
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta) {
+          return row.tgl_berlaku_S;
+        }
+      }
+    ]
   });
 </script>
 @endsection
