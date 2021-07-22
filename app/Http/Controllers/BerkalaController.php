@@ -25,31 +25,45 @@ class BerkalaController extends Controller
     public function tampilberkala(Request $request)
     {
         $orderBy = 'pegawai.NIP';
-        switch ($request->input(('order.0.column'))) {
-            case "1":
+        switch ($request->input('order.0.column')) {
+            case "0":
                 $orderBy = 'pegawai.NIP';
                 break;
-            case "2":
-                $orderBy = 'pegawai.nama';
+            case "1":
+                $orderBy = 'pegawai.Nama';
                 break;
-            case "3":
+            case "2":
                 $orderBy = 'pegawai.masa_kerja_b';
                 break;
-            case "4":
+            case "3":
                 $orderBy = 'gajiberkala.tgl_berlaku_S';
                 break;
         }
 
-        $data = DB::table('tbl_gaji_berkala')
-            ->join('pegawai', 'tbl_gaji_berkala.pegawai_id', '=', 'pegawai.id')
-            ->select('pegawai.NIP', 'pegawai.Nama', 'pegawai.masa_kerja_t', 'pegawai.masa_kerja_b', 'tbl_gaji_berkala.tgl_berlaku_S', 'tbl_gaji_berkala.pegawai_id')
-            ->whereYear('tbl_gaji_berkala.tgl_berlaku_S','=',date_format(now(),'YYYY'))->get();
-            // ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun)->get();
+        $data = DB::table('pegawai')
+            ->join('tbl_gaji_berkala', 'pegawai.id', '=', 'tbl_gaji_berkala.pegawai_id')
+            ->select('pegawai.*', 'tbl_gaji_berkala.tgl_berlaku_S')
+            ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', date_format(now(), 'Y'))->get();
+
+        // $data = Pegawai::select([
+        //     'pegawai.NIP', 'pegawai.Nama', 'pegawai.masa_kerja_t', 'pegawai.masa_kerja_b', 'tbl_gaji_berkala.tgl_berlaku_S'
+        // ])
+        //     ->join('tbl_gaji_berkala','tbl_gaji_berkala.pegawai_id', '=', 'pegawai.id')
+        //     ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', date_format(now(), 'Y'));
+
+
+        // $data = DB::table('pegawai')
+        //     ->join('tbl_gaji_berkala', 'tbl_gaji_berkala.pegawai_id', '=', 'pegawai.id')
+        //     ->select('pegawai.NIP', 'pegawai.Nama', 'pegawai.masa_kerja_t', 'pegawai.masa_kerja_b', 'tbl_gaji_berkala.tgl_berlaku_S')
+        //     // ->whereYear('tbl_gaji_berkala.tgl_berlaku_S','=',date_format(now(),'Y'));
+        // ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun);
 
         $recordsFiltered = $data->count();
 
         if ($request->input('length') != -1) $data = $data->skip($request->input('start'))->take($request->input('length'));
-        $data = $data->sortByDesc($orderBy);
+        // $data = $data->orderBy($orderBy, $request->input('order.0.dir'))->get();
+        // $data = $data->orderBy($orderBy, 'asc')->get();
+        // $data = $data->sortBy($orderBy,'desc');
         $recordsTotal = $data->count();
 
         return response()->json([
