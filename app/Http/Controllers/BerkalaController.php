@@ -42,7 +42,8 @@ class BerkalaController extends Controller
 
         $data = DB::table('pegawai')
             ->join('tbl_gaji_berkala', 'pegawai.id', '=', 'tbl_gaji_berkala.pegawai_id')
-            ->select('pegawai.*', 'tbl_gaji_berkala.tgl_berlaku_S')
+            // ->select('pegawai.*', 'tbl_gaji_berkala.tgl_berlaku_S')
+            -> select('pegawai.NIP', 'pegawai.Nama', 'pegawai.masa_kerja_t', 'pegawai.masa_kerja_b', 'tbl_gaji_berkala.tgl_berlaku_S')
             ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', date_format(now(), 'Y'))->get();
         // ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun);
 
