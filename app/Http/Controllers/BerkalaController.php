@@ -41,9 +41,10 @@ class BerkalaController extends Controller
         }
 
         $data = DB::table('tbl_gaji_berkala')
-            ->join('pegawai', 'tbl_gaji_berkala.pegawai_id', '=', 'pegawai.NIP')
+            ->join('pegawai', 'tbl_gaji_berkala.pegawai_id', '=', 'pegawai.id')
             ->select('pegawai.NIP', 'pegawai.Nama', 'pegawai.masa_kerja_t', 'pegawai.masa_kerja_b', 'tbl_gaji_berkala.tgl_berlaku_S', 'tbl_gaji_berkala.pegawai_id')
-            ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun)->get();
+            ->whereYear('tbl_gaji_berkala.tgl_berlaku_S','=',date_format(now(),'YYYY'))->get();
+            // ->whereyear('tbl_gaji_berkala.tgl_berlaku_S', '=', $request->tahun)->get();
 
         $recordsFiltered = $data->count();
 
