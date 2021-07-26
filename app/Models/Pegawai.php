@@ -78,7 +78,7 @@ class Pegawai extends Model
 
     public function gajiberkala()
     {
-        return $this->hasOne('App\Models\gajiberkala');
+        return $this->hasMany('App\Models\gajiberkala');
     }
 
     public function pangkatberkala()

@@ -250,7 +250,11 @@ Route::post('/simpansekre', 'PegawaiController@simpansekre');
 // Route::resource('/filter', 'BerkalaController@tampilberkalafilter');
 // Route::resource('/tampilberkala', 'BerkalaController@tampilberkala');
 
-Route::any('/tampilberkala', 'BerkalaController@tampilberkala');
+// routing untuk filter ajax
+Route::any('/tampilberkalafilter', 'BerkalaController@tampilberkalafilter');
+
+// untuk loading halaman kali pertama
+route::get('berkalaindex','BerkalaController@berkalaindex');
 
 route::get('tampilberkalaajax', 'BerkalaController@tampilajax');
 

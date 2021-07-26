@@ -269,7 +269,7 @@
                                           </a>
                                           <ul class="nav nav-treeview">
                                                 <li class="nav-item">
-                                                      <a href="/tampilberkala" class="nav-link <?= $CHILDTAG == 'GAJI' ? 'active' : '' ?>">
+                                                      <a href="/berkalaindex" class="nav-link <?= $CHILDTAG == 'GAJI' ? 'active' : '' ?>">
                                                             <i class="nav-icon fas fa-money-bill-alt "></i>
                                                             <p>GAJI</p>
                                                       </a>

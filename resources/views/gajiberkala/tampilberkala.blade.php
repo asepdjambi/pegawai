@@ -31,39 +31,20 @@
     </div>
     <br>
 
-    <table id="table" class="table table-bordered table-striped text-sm table-sm table-gaji">
+    <table id="tabel" class="table table-bordered table-striped text-sm table-sm table-gaji">
       <thead>
 
         <tr style="text-align: center">
           <th>NIP</th>
           <th>Nama</th>
-          <th>Masa Kerja Sebelumya</th>
+          <th>Masa Kerja Sebelumya(Tahun)</th>
+          <th>Masa Kerja Sebelumya(Bulan)</th>
           <th>Tanggal Harus Berkala</th>
           <!-- <th style="width: 20px; text-align:center">Aksi</th> -->
         </tr>
       </thead>
       <tbody>
 
-
-        <!-- {{-- @foreach ($berkala as $berk)
-                                        <tr>
-          <td style="width: 250px">{{ $berk->pegawai->NIP }}</td>
-        <td style="width: 300px">{{ $berk->pegawai->Nama }}</td>
-        <td style="width: 150px; text-align:center">
-          {{ $berk->pegawai->masa_kerja_t }} Tahun
-          {{ $berk->pegawai->masa_kerja_b }} Bulan
-        </td>
-        <td style="width: 150px; text-align:center">
-          {{ $berk->tgl_berlaku_S->format('d-m-Y') }}
-        </td>
-
-        <td style="text-align: center">
-
-          <a href="" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak Gaji Berkala Pegawai" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-
-        </td>
-        </tr>
-        @endforeach --}} -->
       </tbody>
       </tfoot>
     </table>
@@ -74,8 +55,11 @@
 @endsection
 
 @section('js')
-<script>
-  const table = $('#table').DataTable({
+
+<script type="text/javascript">
+  let tahun = $('#tahun-filter').val();
+
+  const table = $('#tabel').DataTable({
     "pageLength": 100,
     "lengthMenu": [
       [10, 25, 50, 100, -1],
@@ -91,9 +75,14 @@
     ],
     "autoWidth": false,
     "ajax": {
-      url: "{{url('')}}/tampilberkala",
+      url: "/tampilberkalafilter",
       type: "POST",
+      data: function(d) {
+        d.tahun = tahun;
+        return d
+      }
     },
+
     columnDefs: [{
         "targets": 0,
         "class": "text-nowrap",
@@ -131,5 +120,13 @@
       }
     ]
   });
+
+
+  $('#tahun-filter').on('change', function() {
+    tahun = $("#tahun-filter").val()
+    table.ajax.reload(null, false)
+  })
+
+
 </script>
 @endsection
