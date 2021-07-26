@@ -40,7 +40,7 @@
           <th>Masa Kerja Sebelumya(Tahun)</th>
           <th>Masa Kerja Sebelumya(Bulan)</th>
           <th>Tanggal Harus Berkala</th>
-          <!-- <th style="width: 20px; text-align:center">Aksi</th> -->
+          <th style="width: 20px; text-align:center">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -117,6 +117,17 @@
         "render": function(data, type, row, meta) {
           return row.tgl_berlaku_S;
         }
+      },
+      {
+        // aksi belum diatur untuk penggunaannya
+        "targets": 5,
+        "sortable": false,
+        "render": function(data, type, row, meta) {
+          let aksi = `
+            <a target="_blank" href="{{url('')}}/karyawan/download_pdf/${row.id}" class="btn btn-sm btn-primary btn-block">CETAK</a>
+          `;
+          return aksi;
+        }
       }
     ]
   });
@@ -126,7 +137,5 @@
     tahun = $("#tahun-filter").val()
     table.ajax.reload(null, false)
   })
-
-
 </script>
 @endsection
