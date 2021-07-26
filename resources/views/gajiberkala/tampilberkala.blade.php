@@ -57,6 +57,8 @@
 @section('js')
 
 <script type="text/javascript">
+// membuat list untuk id agar bisa mencetak berdasarkan ID
+  let list_pegawai = [];
   let tahun = $('#tahun-filter').val();
 
   const table = $('#tabel').DataTable({
@@ -87,6 +89,10 @@
         "targets": 0,
         "class": "text-nowrap",
         "render": function(data, type, row, meta) {
+          
+          // penerapan list_pegawai
+          list_pegawai[row.id]=row;
+          
           return row.NIP;
         }
       },
@@ -124,8 +130,7 @@
         "sortable": false,
         "render": function(data, type, row, meta) {
           let aksi = `
-            <a target="_blank" href="{{url('')}}/karyawan/download_pdf/${row.id}" class="btn btn-sm btn-primary btn-block">CETAK</a>
-          `;
+            <a target="_blank" href="{{url('')}}/karyawan/download_pdf/${row.id}" class="btn btn-sm btn-primary btn-block">CETAK</a> `;
           return aksi;
         }
       }
