@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+// USER
+route::get('user','usercontroller@index');
 // ----------------------------------//
 
 // data pegawai PNS

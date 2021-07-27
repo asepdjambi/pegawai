@@ -201,6 +201,12 @@
                with font-awesome or any other icon font library -->
                                     {{-- menu-open agar menu langsung terbuka --}}
                                     {{-- <li class="nav-item has-treeview menu-open"> --}}
+                                    <li class="nav-item">
+                                          <a href="#" class="nav-link <?= $CHILDTAG == 'SEKDA' ? 'active' : '' ?>">
+                                                <i class="nav-icon fas fa-user "></i>
+                                                <p>USER</p>
+                                          </a>
+                                    </li>
                                     {{-- menu tertutup --}}
                                     <li class="nav-item has-treeview <?= $PARENTTAG == 'PIMPINAN' ? 'menu-open' : '' ?>">
                                           <a href="#" class="nav-link <?= $PARENTTAG == 'PIMPINAN' ? 'active' : '' ?>">
@@ -424,126 +430,7 @@
       <script src="{{ asset('admin/assets/plugins/sweetalert2/sweetalert.min.js') }}"></script>
 
 
-      <script>
-            $(function() {
-                  $("#example1").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                        "ordering": false,
-                  });
-                  $("#example2").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                  });
-                  $("#example3").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                  });
-                  $("#example4").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                  });
-                  $("#example5").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                  });
-                  $("#example6").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                  });
-                  $("#example7").DataTable({
-                        "responsive": true,
-                        "autoWidth": false,
-                  });
-                  $("#example8").DataTable({
-                        "responsive": false,
-                        "autoWidth": true,
-                  });
-                  $('#example').DataTable({
-                        "paging": true,
-                        "lengthChange": false,
-                        "searching": true,
-                        "ordering": true,
-                        "info": true,
-                        "autoWidth": false,
-                        "responsive": false,
-                  });
 
-                  // untuk input mask nomor hp
-                  $('[data-mask]').inputmask()
-
-
-                  //Date time picker
-                  // membuat format tanggal 20-11-2020
-                  $('#reservationdate').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-
-                  $('#reservationdate1').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-
-                  $('#reservationdate2').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-
-                  $('#reservationdate3').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate4').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate5').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate6').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate7').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate8').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate9').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate10').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate11').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  $('#reservationdate12').datetimepicker({
-                        format: 'DD-MM-YYYY',
-                        locale: 'id'
-                  });
-                  // option
-                  //Initialize Select2 Elements
-                  $('.select2').select2()
-
-                  // membuat tooltip
-                  $('[data-toggle="tooltip"]').tooltip()
-
-                  //Initialize Select2 Elements
-                  $('.select2bs4').select2({
-                        theme: 'bootstrap4'
-                  });
-
-            });
-      </script>
 
       {{-- membuat format rupiah --}}
       <script type="text/javascript">
@@ -575,105 +462,21 @@
             }
       </script>
 
-      <script type="text/javascript">
-            var rupiah = document.getElementById('rupiah2');
-            rupiah.addEventListener('keyup', function(e) {
-                  // tambahkan 'Rp.' pada saat form di ketik
-                  // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-                  rupiah.value = formatRupiah(this.value, 'Rp. ');
-                  // hanya angka saja tanpa 'Rp'
-                  rupiah.value = formatRupiah(this.value);
-            });
 
-            /* Fungsi formatRupiah */
-            function formatRupiah(angka, prefix) {
-                  var number_string = angka.replace(/[^,\d]/g, '').toString(),
-                        split = number_string.split(','),
-                        sisa = split[0].length % 3,
-                        rupiah = split[0].substr(0, sisa),
-                        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-                  // tambahkan titik jika yang di input sudah menjadi angka ribuan
-                  if (ribuan) {
-                        separator = sisa ? '.' : '';
-                        rupiah += separator + ribuan.join('.');
-                  }
-
-                  rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-                  return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-            }
-      </script>
-
-
-      <script>
-            $(document).ready(function() {
-                  $('#tahun').on('select2:select', function(e) {
-
-                              $.get('{{ url('
-                                    tampilberkalaajax ') }}'
-                              });
-                  });
-            });
-      </script>
 
       {{-- kembali ke halaman sebelumnya --}}
       <script>
             function goBack() {
-                  window.history.back();
+                  window.history.back(-1);
             }
       </script>
 
-      {{-- konfirmasi hapus data --}}
-      <script>
-            $('.delete-confirm').on('click', function(event) {
-                  event.preventDefault();
-                  const url = $(this).attr('href');
-                  swal({
-                        title: 'Anda Yakin Menghapus Data Ini?',
-                        text: 'Data Akan Terhapus Permanen',
-                        icon: 'warning',
-                        buttons: ["Cancel", "Yes!"],
-                  }).then(function(value) {
-                        if (value) {
-                              window.location.href = url;
-                        }
-                  });
-            });
-      </script>
+
 
       {{-- @php
         $pria = App\models\pegawai::where('JK', '=', 'L')->count();
         $wanita = App\models\pegawai::where('JK', '=', 'P')->count();
     @endphp --}}
-
-      <script>
-            $(function() {
-
-                  var pieChartCanvas = $('#pieChartJK').get(0).getContext('2d')
-                  var pieData = {
-                        labels: [
-                              'Laki-laki', 'Perempuan',
-                        ],
-                        datasets: [{
-                              data: [
-                                    6, 1
-                              ],
-                              backgroundColor: ['#00a65a', '#f56954'],
-                        }]
-                  }
-                  var pieOptions = {
-                        maintainAspectRatio: false,
-                        responsive: true,
-                  }
-                  //Create pie or douhnut chart
-                  // You can switch between pie and douhnut using the method below.
-                  var pieChart = new Chart(pieChartCanvas, {
-                        type: 'pie',
-                        data: pieData,
-                        options: pieOptions
-                  })
-            })
-      </script>
 
       @yield('js')
 

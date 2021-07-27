@@ -8,9 +8,6 @@
         <title>CETAK PDF DATA DIRI PEGAWAI</title>
 
         <link rel="stylesheet" href="admin/assets/dist/css/bootstrap.min.css">
-
-        {{--
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> --}}
     </head>
 
     <body>
@@ -48,7 +45,7 @@
             </div>
 
             <div class="col-5" style="float: right">
-                <img src="arsip/foto/{{ $pegawai->foto }}" alt="" style="float: right;width:80px;heigth:90px">
+                <img src="arsip/foto/{{ $pegawai->foto }}" alt="" style="float: right;width:80px;height:90px">
             </div>
             <br>
             <br>
